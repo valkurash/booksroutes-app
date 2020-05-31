@@ -1,3 +1,10 @@
 {
-  "blog": "Blog"
+  "blog": "Blog",
+  "home": "Home",
+  "change-locale": "Русский",
+  "books-title": "Travel routes based on books. Page {{page}}",
+  "books-description": "Literary routes. Travel guide to places from books. Map for travel and sightseeing tours.",
+  "books-keywords": "literary routes, books routes, travel, tourism, excursions",
+  "routes-title": "Routes",
+  "points-title": "Route points"
 }
