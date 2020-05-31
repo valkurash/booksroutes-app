@@ -6,5 +6,8 @@
   "books-description": "Literary routes. Travel guide to places from books. Map for travel and sightseeing tours.",
   "books-keywords": "literary routes, books routes, travel, tourism, excursions",
   "routes-title": "Routes",
-  "points-title": "Route points"
+  "points-title": "Route points",
+  "book-route-title": "Travel routes based on book «{{title}}»",
+  "book-route-description": "Literary routes. Travel guide to places from book «{{title}}». Map for travel and sightseeing tours.",
+  "book-route-keywords": "literary routes, routes, travel, tourism, excursions, books «{{title}}»"
 }

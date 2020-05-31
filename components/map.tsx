@@ -1,74 +1,79 @@
-import {
-  Map,
-  Polygon,
-  Polyline,
-  TileLayer,
-  Marker,
-  CircleMarker,
-  Popup,
-  GeoJSON
-} from "react-leaflet";
+import { Map, TileLayer, GeoJSON } from "react-leaflet";
 import React from "react";
 import { Point } from "../pages/[lang]/books/[...slug]";
-import L  from 'leaflet';
+import L from "leaflet";
 
-export const pointerIcon = new L.Icon({
-  iconUrl: '/pointerIcon.svg',
-  iconRetinaUrl: '/pointerIcon.svg',
-  iconAnchor: [5, 55],
-  popupAnchor: [10, -44],
-  iconSize: [25, 55],
-  shadowUrl: '/marker-shadow.png',
-  shadowSize: [68, 95],
-  shadowAnchor: [20, 92],
-})
-const   geoJSONStyle=()=> {
+export const pointerIcon = (selected: boolean) =>
+  new L.Icon({
+    iconUrl: selected ? "/marker-selected.svg" : "/marker.svg",
+    iconRetinaUrl: selected ? "/marker-selected.svg" : "/marker.svg",
+    iconAnchor: selected ? [35, 70] : [25, 50],
+    iconSize: selected ? [70, 70] : [50, 50]
+  });
+const geoJSONStyle = (selected: boolean) => {
   return {
-    color: '#1f2021',
-    weight: 1,
+    color: selected?"#FFC473":"#D5243E",
+    weight: 7,
     fillOpacity: 0.5,
-    fillColor: '#fff2af',
-  }
-}
+    fillColor: selected?"#D5243E":"#FFC473"
+  };
+};
 interface Props {
   routeContent: Point[];
-  selectShape:(point:Point)=>void
-  selected: Point;
-}
-//Leaflet.LatLngExpression|Leaflet.LatLngExpression[] | Leaflet.LatLngExpression[][]| Leaflet.LatLngExpression[][][]
-const getCenter=(coordinates: any[])=> {
-  let centerTemp:any[];
-  const findCenter = (val:any[]) => {
-    if (Array.isArray(val[0])) {
-      // @ts-ignore
-      findCenter(val[0])
-    }else{
-      centerTemp=val;
-    }
-  }
-  findCenter(coordinates);
-  return centerTemp;
+  selectShape: (point: Point) => void;
+  selected?: Point;
 }
 
-const RouteMap: React.FunctionComponent<Props> = ({ routeContent,selectShape,selected }: Props) => {
-  const center=selected.shape.type === "Point"?selected.shape.coordinates:getCenter(selected.shape.coordinates);
+const RouteMap: React.FunctionComponent<Props> = ({
+  routeContent,
+  selectShape,
+  selected
+}: Props) => {
+
+
+  const group = new L.FeatureGroup()
+  routeContent.forEach((r:Point)=>group.addLayer(new L.GeoJSON(r.shape)));
+  const groupBounds = group.getBounds();
+  const groupCenter = groupBounds.getCenter();
+
+  const bounds = selected &&
+    new L.GeoJSON(selected.shape).getBounds();
+  const center=bounds&&bounds.getCenter()
+
   return (
-    <Map center={[center[1],center[0]]} zoom={13} style={{ width: "100%", height: "100%" }}>
+    <Map
+      center={selected?center:groupCenter}
+      boundsOptions={{padding: [50, 50]}}
+      bounds={selected?bounds:groupBounds}
+      style={{ width: "100%", height: "100%" }}
+    >
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {routeContent.map((item) => {
-        const { shape,id }=item;
-        return <GeoJSON
-          key={id}
-          data={shape}
-          pointToLayer={(_feature, latLng)=>new L.Marker(latLng, {icon: pointerIcon})}
-          style={geoJSONStyle}
-          onEachFeature={(_feature, layer)=>{layer.on({
-            click: ()=>selectShape(item)
-          });}}
-        />
+      {routeContent.map(item => {
+        const { shape, id } = item;
+        return (
+          <GeoJSON
+            key={`${
+              selected &&selected.id.toString() === id.toString() ? "selected-" : ""
+            }${id}`}
+            data={shape}
+            pointToLayer={(_feature, latLng) =>
+              new L.Marker(latLng, {
+                icon: pointerIcon(!!selected && selected.id.toString() === id.toString())
+              })
+            }
+            style={geoJSONStyle(!!selected && selected.id.toString() === id.toString())}
+            onEachFeature={(_feature, layer) => {
+              layer.on({
+                click: () => {
+                  selectShape(item);
+                }
+              });
+            }}
+          />
+        );
       })}
     </Map>
   );
