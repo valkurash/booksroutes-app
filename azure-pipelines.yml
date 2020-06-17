@@ -13,7 +13,8 @@ variables:
   dockerRegistryServiceConnection: '75cb36cd-adb0-4fc7-a293-9f2dbb458d93'
   imageRepository: 'booksroutesapp'
   containerRegistry: 'gutesterregistry.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/docker/Dockerfile'
+  dockerfileAppPath: '$(Build.SourcesDirectory)/docker/Dockerfile'
+  dockerfileNginxPath: '$(Build.SourcesDirectory)docker/nginx/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -29,12 +30,23 @@ stages:
           vmImage: $(vmImageName)
         steps:
           - task: Docker@2
-            displayName: Build and push an image to container registry
+            displayName: Build and push app to registry
             inputs:
               command: buildAndPush
               repository: $(imageRepository)
-              dockerfile: $(dockerfilePath)
+              dockerfile: $(dockerfileAppPath)
               buildContext: $(Build.Repository.LocalPath)
+              containerRegistry: $(dockerRegistryServiceConnection)
+              tags: |
+                $(tag)
+                latest
+          - task: Docker@2
+            displayName: Build and push nginx to registry
+            inputs:
+              command: buildAndPush
+              repository: $(imageRepository)
+              dockerfile: $(dockerfileNginxPath)
+              buildContext: $(Build.Repository.LocalPath)/docker/nginx
               containerRegistry: $(dockerRegistryServiceConnection)
               tags: |
                 $(tag)
