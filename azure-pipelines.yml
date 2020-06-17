@@ -14,7 +14,7 @@ variables:
   imageRepository: 'booksroutesapp'
   containerRegistry: 'gutesterregistry.azurecr.io'
   dockerfileAppPath: '$(Build.SourcesDirectory)/docker/Dockerfile'
-  dockerfileNginxPath: '$(Build.SourcesDirectory)docker/nginx/Dockerfile'
+  dockerfileNginxPath: '$(Build.SourcesDirectory)/docker/nginx/Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
