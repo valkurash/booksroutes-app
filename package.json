@@ -36,9 +36,7 @@
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
     "sass": "^1.26.5",
-    "url-loader": "^4.1.0"
-  },
-  "devDependencies": {
+    "url-loader": "^4.1.0",
     "@types/next-redux-saga": "^3.0.2",
     "@types/node": "^13.13.4",
     "@types/node-fetch": "^2.5.7",
