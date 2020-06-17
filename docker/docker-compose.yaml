@@ -16,5 +16,8 @@ services:
     container_name: booksroutesnginx
     networks:
       - booksroutes-application
+    environment:
+      - CERTBOT_EMAIL=dimaivanov1@mail.ru
+      - NODE_ENV=production
     ports:
       - '80:80'
