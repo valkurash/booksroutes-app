@@ -1,0 +1,20 @@
+version: '3'
+networks:
+  booksroutes-application:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.28.0.1/16
+services:
+  booksroutesapp:
+    image: gutesterregistry.azurecr.io/booksroutesapp
+    container_name: booksroutesapp
+    networks:
+      - booksroutes-application
+  nginx:
+    image: gutesterregistry.azurecr.io/booksroutesnginx
+    container_name: booksroutesnginx
+    networks:
+      - booksroutes-application
+    ports:
+      - '80:80'
