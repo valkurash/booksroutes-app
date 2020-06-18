@@ -7,4 +7,4 @@ COPY ./nginx.conf /etc/nginx/conf.d/
 # Expose the listening port
 EXPOSE 80
 
-CMD [ "sh", "-c", "service ssh start; bash"]
+CMD tail -f /dev/null
