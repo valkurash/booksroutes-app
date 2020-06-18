@@ -206,7 +206,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
   const book = await res.json();
   const pointsRes = await fetch(
-    `http://booksroutes.info:1400/api/route/${slug[1]}?join=points`
+    `/api/route/${slug[1]}?join=points`
   );
   const points = await pointsRes.json();
   // Pass post data to the page via props
