@@ -200,13 +200,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   const lang = req ? (req as any).language : i18n.language || "ru";
   // @ts-ignore
   const res = await fetch(
-    `http://booksroutes.info:1400/api/book/${
+    `${process.env.SERVER_URL}/api/book/${
       slug[0]
     }?join=routes&join=routes.points`
   );
   const book = await res.json();
   const pointsRes = await fetch(
-    `/api/route/${slug[1]}?join=points`
+    `${process.env.SERVER_URL}/api/route/${slug[1]}?join=points`
   );
   const points = await pointsRes.json();
   // Pass post data to the page via props

@@ -123,7 +123,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const lang = req ? (req as any).language : i18n.language || "ru";
   const res = await fetch(
-    `http://booksroutes.info:1400/api/book?join=routes&page=${params.page ||
+    `,${process.env.SERVER_URL}/api/book?join=routes&page=${params.page ||
       1}&limit=18`
   );
   const books = await res.json();
