@@ -121,7 +121,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   params = {},
   req
 }) => {
-  const lang = req ? (req as any).language : i18n.language || "ru";
+  const lang = req ? (req as any).language : (i18n.language || (i18n.options as any).defaultLanguage);
   const res = await fetch(
     `${process.env.SERVER_URL}/api/book?join=routes&page=${params.page ||
       1}&limit=18`
