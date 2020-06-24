@@ -9,5 +9,8 @@
   "points-title": "Route points",
   "book-route-title": "Travel routes based on book «{{title}}»",
   "book-route-description": "Literary routes. Travel guide to places from book «{{title}}». Map for travel and sightseeing tours.",
-  "book-route-keywords": "literary routes, routes, travel, tourism, excursions, books «{{title}}»"
+  "book-route-keywords": "literary routes, routes, travel, tourism, excursions, books «{{title}}»",
+  "confirm-title": "Email confirmation",
+  "confirm-success": "Email {{email}} successfully confirmed!",
+  "confirm-error": "Some error occurs in email {{email}} confirmation. Please try again later."
 }

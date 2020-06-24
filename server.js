@@ -23,7 +23,12 @@ const handle = app.getRequestHandler();
         .redirect(`/${req.cookies["next-i18next"] === "en" ? "en" : "ru"}/1`);
     } else if (req.url === "/ru" || req.url === "/en") {
       res.status(301).redirect(`/${req.url}/1`);
-    } else {
+    }
+    else if(req.url.startsWith("/utils")){
+      res
+          .status(301)
+          .redirect(`/${req.cookies["next-i18next"] === "en" ? "en" : "ru"}${req.url}`);
+    }else {
       handle(req, res);
     }
   });
