@@ -12,5 +12,11 @@
   "book-route-keywords": "literary routes, routes, travel, tourism, excursions, books «{{title}}»",
   "confirm-title": "Email confirmation",
   "confirm-success": "Email {{email}} successfully confirmed!",
-  "confirm-error": "Some error occurs in email {{email}} confirmation. Please try again later."
+  "confirm-error": "Some error occurs in email {{email}} confirmation. Please try again later.",
+  "password-reset-title": "Password change",
+  "password-reset-success": "Password for {{email}} successfully changed!",
+  "password-reset-error": "Some error occurs in password changing for {{email}}. Please try again later.",
+  "password-new-label": "New password",
+  "password-msg": "Please input your password!",
+  "submit": "Submit"
 }
