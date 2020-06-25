@@ -42,18 +42,22 @@ const ResetPassword: React.FunctionComponent<Props> = ({
   const renderContent = () => {
     const onFinish = async ({ password }: Partial<ResetReq>) => {
       setReqState(EReqState.PENDING);
-      const res = await fetch(`${serverUrl}/api/user/reset`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, code, password })
-      });
-      const response = await res.json();
-      const { errorCode = 0 } = response;
-      setReqState(
-        errorCode && parseInt(errorCode) ? EReqState.ERROR : EReqState.SUCCESS
-      );
+      try {
+        const res = await fetch(`/api/user/reset`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, code, password })
+        });
+        const response = await res.json();
+        const { errorCode = 0 } = response;
+        setReqState(
+          errorCode && parseInt(errorCode) ? EReqState.ERROR : EReqState.SUCCESS
+        );
+      } catch (err) {
+        setReqState(EReqState.ERROR);
+      }
     };
 
     if (!email || !code)
@@ -143,8 +147,7 @@ const ResetPassword: React.FunctionComponent<Props> = ({
           content="https://booksroutes.info/images/og-image.jpg"
         />
       </Head>
-      <div style={{marginTop:'150px'}}>
-        {renderContent()}</div>
+      <div style={{ marginTop: "150px" }}>{renderContent()}</div>
     </>
   );
 };
