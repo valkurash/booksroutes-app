@@ -23,8 +23,7 @@ interface ResetReq {
   password: string;
 }
 const ResetPassword: React.FunctionComponent<Props> = ({
-  t,
-  serverUrl
+  t
 }: Props) => {
   const layout = {
     labelCol: { span: 8 },
@@ -150,12 +149,6 @@ const ResetPassword: React.FunctionComponent<Props> = ({
       <div style={{ marginTop: "150px" }}>{renderContent()}</div>
     </>
   );
-};
-
-// This also gets called at build time
-// @ts-ignore
-export const getServerSideProps: GetServerSideProps = async () => {
-  return { props: { serverUrl: process.env.SERVER_URL } };
 };
 
 export default withTranslation("common")(ResetPassword);
