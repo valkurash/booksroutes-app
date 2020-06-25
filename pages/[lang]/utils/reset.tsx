@@ -1,5 +1,4 @@
 import fetch from "node-fetch";
-import { GetServerSideProps } from "next";
 import * as React from "react";
 import { withTranslation } from "../../../i18n";
 import { WithTranslation } from "next-i18next";
