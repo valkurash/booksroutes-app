@@ -71,9 +71,13 @@ const Book: React.FunctionComponent<Props> = ({
   const [selectedPoint, setSelectedPoint] = React.useState<Point>();
   const siderRef = React.useRef<any>();
   const refs = points.reduce((acc: any, value) => {
-    acc[value.id] = React.useRef<any>(null);
+    acc[value.id] = React.createRef<any>();
     return acc;
   }, {});
+
+  React.useEffect(() => {
+    setSelectedPoint(undefined)
+  }, [routeId]);
 
   React.useEffect(() => {
     if (selectedPoint) {

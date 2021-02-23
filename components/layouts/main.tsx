@@ -30,6 +30,7 @@ const MainLayout = ({ children, t }: Props) => {
 
   const menuItems = (mobile: boolean = false) => [
     <Button
+        key="blog"
       className={mobile ? "mobile-menu" : "pc-menu"}
       type="link"
       href="//blog.booksroutes.info"
@@ -40,6 +41,7 @@ const MainLayout = ({ children, t }: Props) => {
       {t("common:blog")}
     </Button>,
     <Button
+        key="instagram"
       className={mobile ? "mobile-menu" : "pc-menu"}
       type="link"
       href="//www.instagram.com/books_routes/"
@@ -48,6 +50,7 @@ const MainLayout = ({ children, t }: Props) => {
       size="large"
     >{mobile ? "Instagram" : ""}</Button>,
     <Button
+        key="twitter"
       className={mobile ? "mobile-menu" : "pc-menu"}
       type="link"
       href="//twitter.com/booksroutes"
@@ -58,6 +61,7 @@ const MainLayout = ({ children, t }: Props) => {
     ...(mobile
       ? [
           <Button
+              key="mail"
             className="mobile-menu"
             type="link"
             href="mailto:booksroutes.info@gmail.com"
@@ -67,6 +71,7 @@ const MainLayout = ({ children, t }: Props) => {
         ]
       : [
           <Tooltip
+              key="tooltip"
             className="pc-menu"
             title="booksroutes.info@gmail.com"
             placement="bottom"
@@ -80,6 +85,7 @@ const MainLayout = ({ children, t }: Props) => {
           </Tooltip>
         ]),
     <Button
+        key="lang"
       className={mobile ? "mobile-menu" : "pc-menu"}
       type="link"
       size="large"
